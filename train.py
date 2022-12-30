@@ -372,7 +372,7 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
             callbacks.run('on_fit_epoch_end', log_vals, epoch, best_fitness, fi)
 
             # Save model
-            if (not nosave) or (final_epoch and not evolve):  # if save
+            if (not nosave) or (epoch % opt.save_period == 0):  # if save
                 ckpt = {'epoch': epoch,
                         'best_fitness': best_fitness,
                         'model': deepcopy(de_parallel(model)).half(),
@@ -442,7 +442,7 @@ def parse_opt(known=False):
     parser.add_argument('--weights', type=str, default=ROOT / 'yolov3.pt', help='initial weights path')
     parser.add_argument('--cfg', type=str, default='', help='model.yaml path')
     parser.add_argument('--data', type=str, default=ROOT / 'data/coco128.yaml', help='dataset.yaml path')
-    parser.add_argument('--hyp', type=str, default=ROOT / 'data/hyps/hyp.scratch.yaml', help='hyperparameters path')
+    parser.add_argument('--hyp', type=str, default=ROOT / 'data/hyps/hyp.scratch-med.yaml', help='hyperparameters path')
     parser.add_argument('--epochs', type=int, default=300)
     parser.add_argument('--batch-size', type=int, default=16, help='total batch size for all GPUs, -1 for autobatch')
     parser.add_argument('--imgsz', '--img', '--img-size', type=int, default=640, help='train, val image size (pixels)')

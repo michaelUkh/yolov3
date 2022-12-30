@@ -83,8 +83,9 @@ class Detect(nn.Module):
 
 
 class Model(nn.Module):
-    def __init__(self, cfg='yolov3.yaml', ch=3, nc=None, anchors=None):  # model, input channels, number of classes
+    def __init__(self, cfg='yolov3.yaml', ch=3, nc=None, anchors=None,printms=False):  # model, input channels, number of classes
         super().__init__()
+        self.printms=printms
         if isinstance(cfg, dict):
             self.yaml = cfg  # model dict
         else:  # is *.yaml
@@ -216,8 +217,9 @@ class Model(nn.Module):
     #         if type(m) is Bottleneck:
     #             LOGGER.info('%10.3g' % (m.w.detach().sigmoid() * 2))  # shortcut weights
 
-    def fuse(self):  # fuse model Conv2d() + BatchNorm2d() layers
-        LOGGER.info('Fusing layers... ')
+    def fuse(self,printms=False):  # fuse model Conv2d() + BatchNorm2d() layers
+        if(printms):
+            LOGGER.info('Fusing layers... ')
         for m in self.model.modules():
             if isinstance(m, (Conv, DWConv)) and hasattr(m, 'bn'):
                 m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv

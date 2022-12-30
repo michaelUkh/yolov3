@@ -275,7 +275,7 @@ class Concat(nn.Module):
 
 class DetectMultiBackend(nn.Module):
     #  MultiBackend class for python inference on various backends
-    def __init__(self, weights='yolov3.pt', device=None, dnn=True):
+    def __init__(self, weights='yolov3.pt', device=None, dnn=True, printms=False):
         # Usage:
         #   PyTorch:      weights = *.pt
         #   TorchScript:            *.torchscript.pt

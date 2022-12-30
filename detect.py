@@ -201,6 +201,7 @@ def run(weights=ROOT / 'yolov3.pt',  # model.pt path(s)
         strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
 
 
+
 def parse_opt():
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', nargs='+', type=str, default=ROOT / 'yolov3.pt', help='model path(s)')
