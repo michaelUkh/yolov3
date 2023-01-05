@@ -116,7 +116,7 @@ def create_predict(model,device='',conf_thres=0.25,iou_thres=0.45,classes=None, 
 def parse_opt():
     #/ todo: fix prase_opt for us
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', nargs='+', type=str, default=ROOT / 'yolov3.pt', help='model path(s)')
+    parser.add_argument('--weights', nargs='+', type=str, default=ROOT / 'best.pt', help='model path(s)')
     parser.add_argument('--im', type=str, default="../HW1_dataset/images/P016_balloon1_9.jpg", help='file/dir/URL/glob, 0 for webcam')
     parser.add_argument('--imgsz', '--img', '--img-size', nargs='+', type=int, default=[640], help='inference size h,w')
     parser.add_argument('--conf-thres', type=float, default=0.25, help='confidence threshold')
